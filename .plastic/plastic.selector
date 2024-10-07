@@ -1,4 +1,0 @@
-repository "CIS Horror Game@EvilWumpus@cloud"
-  path "/"
-    br "/main"
-    co "/main"
