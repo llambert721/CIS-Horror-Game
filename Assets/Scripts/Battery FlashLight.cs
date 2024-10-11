@@ -37,7 +37,7 @@ public class FlashlightAdvanced : MonoBehaviour
         text.text = lifetime.ToString("0") + "%";
         batteryText.text = batteries.ToString();
 
-        if (Input.GetButtonDown("E") && off)
+        if (Input.GetButtonDown("F") && off)
         {
             flashON.Play();
             light.enabled = true;
@@ -45,7 +45,7 @@ public class FlashlightAdvanced : MonoBehaviour
             off = false;
         }
 
-        else if (Input.GetButtonDown("E") && on)
+        else if (Input.GetButtonDown("F") && on)
         {
             flashOFF.Play();
             light.enabled = false;
