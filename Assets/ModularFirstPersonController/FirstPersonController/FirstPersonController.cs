@@ -384,9 +384,15 @@ public class FirstPersonController : MonoBehaviour
                 isWalking = false;
             }
 
-            // All movement calculations shile sprint is active
-            if (enableSprint && Input.GetKey(sprintKey) && sprintRemaining > 0f && !isSprintCooldown)
+            // Apply speed changes based on crouch or sprint
+            if (isCrouched)
             {
+                // When crouched, reduce speed
+                targetVelocity = transform.TransformDirection(targetVelocity) * (walkSpeed * speedReduction); // Slow down when crouched
+            }
+            else if (enableSprint && Input.GetKey(sprintKey) && sprintRemaining > 0f && !isSprintCooldown)
+            {
+                // Sprinting logic
                 targetVelocity = transform.TransformDirection(targetVelocity) * sprintSpeed;
 
                 // Apply a force that attempts to reach our target velocity
@@ -396,16 +402,11 @@ public class FirstPersonController : MonoBehaviour
                 velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
                 velocityChange.y = 0;
 
-                // Player is only moving when valocity change != 0
-                // Makes sure fov change only happens during movement
+                // Sprinting triggers FOV change and HUD elements
                 if (velocityChange.x != 0 || velocityChange.z != 0)
                 {
                     isSprinting = true;
-
-                    if (isCrouched)
-                    {
-                        Crouch();
-                    }
+                    isCrouched = false; // Cancel crouch if sprinting
 
                     if (hideBarWhenFull && !unlimitedSprint)
                     {
@@ -415,11 +416,12 @@ public class FirstPersonController : MonoBehaviour
 
                 rb.AddForce(velocityChange, ForceMode.VelocityChange);
             }
-            // All movement calculations while walking
             else
             {
+                // Regular walking
                 isSprinting = false;
 
+                // Hide sprint bar when not needed
                 if (hideBarWhenFull && sprintRemaining == sprintDuration)
                 {
                     sprintBarCG.alpha -= 3 * Time.deltaTime;
