@@ -26,7 +26,7 @@ public class PoweredFlashLight : MonoBehaviour
 
     [Tooltip("Is the flashlight on?")]private bool flashlightIsOn;
 
-    [Tooltip("The key that you need to press to turn on/off the flashlight.")] [SerializeField] KeyCode ToggleKey = KeyCode.T;
+    [Tooltip("The key that you need to press to turn on/off the flashlight.")] [SerializeField] KeyCode ToggleKey = KeyCode.F;
 
     [Header("References")]
 
