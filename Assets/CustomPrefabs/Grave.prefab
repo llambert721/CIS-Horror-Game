@@ -47,8 +47,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5108022189160216236}
   - component: {fileID: 7457337482681685363}
-  - component: {fileID: 8768817450917886685}
-  - component: {fileID: 707451652100457324}
+  - component: {fileID: 4424891087279982700}
   m_Layer: 7
   m_Name: Batteries
   m_TagString: ItemPickUp
@@ -93,9 +92,9 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.19, y: 0.16, z: 0.22}
+  m_Size: {x: 0.34, y: 0.34, z: 0.28}
   m_Center: {x: -0.04, y: -0.19, z: -0.38}
---- !u!114 &8768817450917886685
+--- !u!114 &4424891087279982700
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -104,31 +103,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 7409824529215908657}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16b3f2a27654a4b47946b544a8fa6864, type: 3}
+  m_Script: {fileID: 11500000, guid: 96a14e7dc3adf4541a7796441f9efdfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pickupLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   pickupRange: 3
   keybind: 101
---- !u!114 &707451652100457324
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7409824529215908657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5e892d852c7bb949a50e78c2fa54057, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pickupLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  pickupRange: 3
-  keybind: 101
+  textMeshObject: {fileID: 8396667358717135017, guid: 3f0489a9eef09044fbef1782c455f7f9, type: 3}
 --- !u!1001 &1991700616246303500
 PrefabInstance:
   m_ObjectHideFlags: 0

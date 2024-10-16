@@ -8,6 +8,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2527581736321797312, guid: 9400f0bc87cdf26428d6a26ee13deda9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2527581736321797312, guid: 9400f0bc87cdf26428d6a26ee13deda9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 2527581736321797312, guid: 9400f0bc87cdf26428d6a26ee13deda9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.06
+      objectReference: {fileID: 0}
     - target: {fileID: 4114874669056294904, guid: 9400f0bc87cdf26428d6a26ee13deda9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.361
@@ -71,6 +83,14 @@ PrefabInstance:
     - target: {fileID: 4213951705743829736, guid: 9400f0bc87cdf26428d6a26ee13deda9, type: 3}
       propertyPath: m_Name
       value: Cabin3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329782690813600364, guid: 9400f0bc87cdf26428d6a26ee13deda9, type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329782690813600364, guid: 9400f0bc87cdf26428d6a26ee13deda9, type: 3}
+      propertyPath: m_Center.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4662626526499856309, guid: 9400f0bc87cdf26428d6a26ee13deda9, type: 3}
       propertyPath: m_LocalPosition.x
