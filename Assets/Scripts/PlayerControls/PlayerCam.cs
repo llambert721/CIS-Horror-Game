@@ -22,6 +22,14 @@ public class PlayerCam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Checks to see if the game is paused before it can move the camera
+        if (PauseMenu.GameIsPause)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            return;
+        }
+
         // get mouse input
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
