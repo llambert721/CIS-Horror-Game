@@ -12,7 +12,7 @@ public class ItemPickup : MonoBehaviour
     public float pickupRange = 3f;
     public KeyCode keybind = KeyCode.E;
     public GameObject textMeshObject;
- 
+
 
     void Start()
     {
@@ -25,12 +25,14 @@ public class ItemPickup : MonoBehaviour
         isHovering = false;
         Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
         RaycastHit hit;
+        string colliderName = gameObject.name;
 
         if (Physics.Raycast(ray, out hit, pickupRange, pickupLayer)) // if raycast hits item with layer applied and keybind held down run PickupItem()
         {
+            isHovering = true;
+            colliderName = hit.collider.gameObject.name;
             if (hit.collider.gameObject == gameObject)
             {
-                isHovering = true;
                 if (Input.GetKeyDown(keybind))
                 {
                     PickupItem(gameObject);
@@ -38,7 +40,7 @@ public class ItemPickup : MonoBehaviour
             }
         }
 
-        DisplayText(gameObject.name);
+        DisplayText(colliderName);
     }
 
     public virtual void PickupItem(GameObject obj) // logs pickup to console and deletes object
