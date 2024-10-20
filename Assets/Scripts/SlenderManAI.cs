@@ -19,6 +19,15 @@ public class SlenderManAI : MonoBehaviour
     private bool returningToBase;
     public LayerMask groundLayer;
 
+    public LayerMask playerMask;
+    public LayerMask obstacleMask;
+    public UnityEngine.AI.NavMeshAgent navMeshAgent;
+    private bool isChasing; // is chasing when it's teleported to you and angry
+    private float runSpeed = 3.5f;
+    public Transform[] waypoints;
+    int currentWaypointIndex = 0;
+    // private float angryRunSpeed = 4.2f; not used yet
+
     private void Start()
     {
         baseTeleportSpot = transform.position;
@@ -85,6 +94,9 @@ public class SlenderManAI : MonoBehaviour
                 staticObject.SetActive(false);
             }
         }
+
+        EnvironmentView();
+        
     }
 
     private void DecideTeleportAction()
@@ -99,6 +111,40 @@ public class SlenderManAI : MonoBehaviour
         {
             TeleportToBaseSpot();
         }
+    }
+
+    private void Chase()
+    {
+        navMeshAgent.isStopped = false;
+        navMeshAgent.speed = runSpeed;
+        navMeshAgent.SetDestination(player.position);
+    }
+
+    void EnvironmentView()
+    {
+        Collider[] playerInRange = Physics.OverlapSphere(transform.position, 25f, playerMask);
+
+        for(int i = 0; i < playerInRange.Length; i++)
+        {
+            Debug.Log("monster sees the player");
+            Transform playerTransform = playerInRange[i].transform;
+            Vector3 dirToPlayer = (player.position - transform.position).normalized;
+            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        }
+        if (Vector3.Distance(transform.position, player.position) >= 25f)
+        {
+            StopChasing();
+        }
+        else
+        {
+            Chase();
+        }
+    }
+
+    private void StopChasing()
+    {
+        navMeshAgent.isStopped = true;
+        navMeshAgent.speed = 0;
     }
 
     private void TeleportNearPlayer()
@@ -122,6 +168,7 @@ public class SlenderManAI : MonoBehaviour
     {
         transform.position = baseTeleportSpot;
         returningToBase = true;
+        StopChasing();
     }
 
     private void RotateTowardsPlayer()
@@ -132,7 +179,7 @@ public class SlenderManAI : MonoBehaviour
         if (directionToPlayer != Vector3.zero)
         {
             Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
-            targetRotation *= Quaternion.Euler(0, -90, 0); // rotates 90 degrees so it's facing player
+            targetRotation *= Quaternion.Euler(0, -120, 0); // rotates 90 degrees so it's facing player
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
     }
