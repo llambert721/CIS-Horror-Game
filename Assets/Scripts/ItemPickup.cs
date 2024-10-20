@@ -60,12 +60,10 @@ public class ItemPickup : MonoBehaviour
 
         if (isHovering)
         {
-            Debug.Log("Is Hovering");
             textMesh.enabled = true;
         }
         else
         {
-            Debug.Log("Is NOT hovering");
             textMesh.enabled = false;
         }
     }
