@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SlenderManAI : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class SlenderManAI : MonoBehaviour
     public LayerMask obstacleMask;
     public UnityEngine.AI.NavMeshAgent navMeshAgent;
     private bool isChasing; // is chasing when it's teleported to you and angry
-    private float runSpeed = 3.5f;
+    private float runSpeed = 2.8f;
     public Transform[] waypoints;
     int currentWaypointIndex = 0;
     // private float angryRunSpeed = 4.2f; not used yet
@@ -138,6 +139,10 @@ public class SlenderManAI : MonoBehaviour
         else
         {
             Chase();
+        }
+        if (Vector3.Distance(transform.position, player.position) <= 2f)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
