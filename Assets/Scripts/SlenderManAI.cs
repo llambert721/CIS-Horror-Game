@@ -145,10 +145,10 @@ public class SlenderManAI : MonoBehaviour
         {
             Chase();
         }
-        if (Vector3.Distance(transform.position, player.position) <= 2f)
+        if (Vector3.Distance(transform.position, player.position) <= 1f)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            // resets the game because the player is dead
+            //Goes to deathscene when player gets touched
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 
