@@ -246,6 +246,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6498952313287293706, guid: 67cfb14e615b9cf48b515384d77e0817, type: 3}
   m_PrefabInstance: {fileID: 1492355083}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &425970300 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7409824529215908657, guid: 67cfb14e615b9cf48b515384d77e0817, type: 3}
+  m_PrefabInstance: {fileID: 1492355083}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &425970302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425970300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b55da0531c35c014c9975a6f523c3a01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  batteryWeight: 100
+  CollectKey: 101
+  HoverObject: []
 --- !u!4 &537986347 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1354141976217420908, guid: 9cf63e2b497317149a4bae589a4b4047, type: 3}
@@ -928,7 +948,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 1.5
   m_Range: 13.06
   m_SpotAngle: 179
   m_InnerSpotAngle: 1
@@ -1197,6 +1217,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2066995884}
     m_Modifications:
+    - target: {fileID: 5108022189160216236, guid: 67cfb14e615b9cf48b515384d77e0817, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.6548
+      objectReference: {fileID: 0}
     - target: {fileID: 6498952313287293706, guid: 67cfb14e615b9cf48b515384d77e0817, type: 3}
       propertyPath: m_LocalPosition.x
       value: -89.71912
@@ -1244,7 +1268,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7409824529215908657, guid: 67cfb14e615b9cf48b515384d77e0817, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 425970302}
   m_SourcePrefab: {fileID: 100100000, guid: 67cfb14e615b9cf48b515384d77e0817, type: 3}
 --- !u!4 &1551765217 stripped
 Transform:
@@ -1436,7 +1463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d75119ec0e216049a5345214437ac8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  batteryLossTick: 0
+  batteryLossTick: 0.14
   startBattery: 100
   currentBattery: 0
   state: 0
