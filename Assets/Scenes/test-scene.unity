@@ -591,7 +591,6 @@ MonoBehaviour:
   teleportDistance: 20
   teleportCooldown: 30
   returnCooldown: 10
-  chaseProbability: 0.69
   rotationSpeed: 5
   teleportSound: {fileID: 8300000, guid: c56b3ed1e93aa184b85aafb666cafc6b, type: 3}
   staticObject: {fileID: 0}
@@ -1383,6 +1382,7 @@ MonoBehaviour:
   pickupRange: 3
   keybind: 101
   textMeshObject: {fileID: 1361763657}
+  monsterObject: {fileID: 0}
 --- !u!1001 &780817691
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1628,6 +1628,7 @@ MonoBehaviour:
   pickupRange: 3
   keybind: 101
   textMeshObject: {fileID: 1361763657}
+  monsterObject: {fileID: 0}
 --- !u!1 &815712890
 GameObject:
   m_ObjectHideFlags: 0
@@ -2174,6 +2175,7 @@ MonoBehaviour:
   pickupRange: 3
   keybind: 101
   textMeshObject: {fileID: 1361763657}
+  monsterObject: {fileID: 0}
 --- !u!4 &999342148 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1728817177789119050, guid: fbd56508bdf8571439d8b91aa65d9d08, type: 3}

@@ -12,6 +12,7 @@ public class ItemPickup : MonoBehaviour
     public float pickupRange = 3f;
     public KeyCode keybind = KeyCode.E;
     public GameObject textMeshObject;
+    public GameObject monsterObject; // so it gets more angry as the player progresses
 
 
     void Start()
@@ -46,6 +47,8 @@ public class ItemPickup : MonoBehaviour
     public virtual void PickupItem(GameObject obj) // logs pickup to console and deletes object
     {
         Debug.Log("Picked up " + obj.name);
+
+
 
         Destroy(obj);
     }

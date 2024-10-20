@@ -7,7 +7,7 @@ public class SlenderManAI : MonoBehaviour
     public float teleportDistance = 10f; // Maximum teleportation distance
     public float teleportCooldown = 5f; // Time between teleportation attempts
     public float returnCooldown = 10f; // Time before returning to base spot
-    [Range(0f, 1f)] public float chaseProbability = 0.65f; // Probability of chasing the player
+    [Range(0f, 1f)] private float chaseProbability = 0.65f; // Probability of chasing the player
     public float rotationSpeed = 5f; // Rotation speed when looking at the player
     public AudioClip teleportSound; // Reference to the teleport sound effect
     private AudioSource audioSource;
@@ -100,6 +100,11 @@ public class SlenderManAI : MonoBehaviour
         
     }
 
+    private void SetChaseProbability(float newProbability)
+    {
+        chaseProbability = newProbability;
+    }
+
     private void DecideTeleportAction()
     {
         float randomValue = Random.value;
@@ -143,6 +148,7 @@ public class SlenderManAI : MonoBehaviour
         if (Vector3.Distance(transform.position, player.position) <= 2f)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            // resets the game because the player is dead
         }
     }
 
