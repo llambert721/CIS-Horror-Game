@@ -14,6 +14,8 @@ public class MoveCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PauseMenu.GameIsPause)
+            return;
         transform.position = cameraPostion.position;
     }
 }
