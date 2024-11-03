@@ -5,7 +5,6 @@ using UnityEngine;
 public class RadioCountManager : MonoBehaviour
 {
     public int count = 0;
-
     public void AddRadio()
     {
         count++;
