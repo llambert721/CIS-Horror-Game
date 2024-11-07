@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ItemPickUp
   - Door
+  - Reach
   layers:
   - Default
   - TransparentFX
