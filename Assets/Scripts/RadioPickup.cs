@@ -10,7 +10,7 @@ public class RadioPickup : ItemPickup
 
         if (FindObjectOfType<RadioCountManager>().IsRadioPartsCollected())
         {
-            Debug.Log("You won");
+            FindObjectOfType<RadioCountManager>().StartEndGame();
         }
 
         base.PickupItem(obj);
