@@ -29,12 +29,6 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine(FadeOutAfterDelay(5f));
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     IEnumerator FadeOutAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);

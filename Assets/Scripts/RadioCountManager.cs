@@ -7,14 +7,21 @@ public class RadioCountManager : MonoBehaviour
 {
     public int count = 0;
     public GameObject textMeshObject;
+    public GameObject messageObject;
     public float totalTime = 300f;
     public bool timerEnded = false;
+    public float fadeDuration = 2f;
 
     private TextMeshProUGUI textMesh;
+    private TextMeshProUGUI message;
 
     void Start()
     {
         textMesh = textMeshObject.GetComponent<TextMeshProUGUI>();
+        message = messageObject.GetComponent<TextMeshProUGUI>();
+
+        messageObject.SetActive(true);
+        message.enabled = false;
     }
 
     public void AddRadio()
@@ -34,6 +41,10 @@ public class RadioCountManager : MonoBehaviour
 
     public void StartEndGame()
     {
+        message.text = "Survive and make it to the beach...";
+        message.enabled = true;
+
+        StartCoroutine(FadeOutAfterDelay(5f));
         StartCoroutine(StartCountdown());
     }
 
@@ -66,6 +77,24 @@ public class RadioCountManager : MonoBehaviour
         // Set timer to 0 and display "00:00" when done
         textMesh.text = "";
         timerEnded = true;
+    }
+
+    IEnumerator FadeOutAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        float elapsedTime = 0f;
+        Color originalColor = message.color;
+
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float alpha = Mathf.Lerp(1f, 0f, elapsedTime / fadeDuration);
+            message.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
+            yield return null;
+        }
+
+        message.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0f);  // Ensure it's fully transparent at the end
     }
 
     public bool IsTimerEnded()
