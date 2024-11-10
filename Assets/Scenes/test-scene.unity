@@ -8559,8 +8559,8 @@ MonoBehaviour:
   state: 0
   ToggleKey: 102
   FlashlightLight: {fileID: 4207753901239215112}
-  FlashlightOn_FX: {fileID: 0}
-  FlashlightOff_FX: {fileID: 0}
+  FlashlightOn_FX: {fileID: 8300000, guid: 80cee1c4328b3754ca519579ae4570fe, type: 3}
+  FlashlightOff_FX: {fileID: 8300000, guid: 80cee1c4328b3754ca519579ae4570fe, type: 3}
   textMeshObject: {fileID: 701960519}
 --- !u!4 &1643782960 stripped
 Transform:
