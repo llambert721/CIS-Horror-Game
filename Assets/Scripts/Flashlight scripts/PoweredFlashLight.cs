@@ -43,7 +43,7 @@ public class PoweredFlashLight : MonoBehaviour
     private void Start()
     {
         textMesh = textMeshObject.GetComponent<TextMeshProUGUI>();
-        currentBattery = startBattery; //Set the current battery to the start battery when the game starts
+        currentBattery = startBattery; //Set the current batterwy to the start battery when the game starts
 
         InvokeRepeating(nameof(LoseBattery), 0, batteryLossTick); // Losses the battery at a set interval of time
     }

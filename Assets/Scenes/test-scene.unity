@@ -255,6 +255,18 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4424891087279982700, guid: 67cfb14e615b9cf48b515384d77e0817, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 1624640233}
+    - target: {fileID: 4424891087279982700, guid: 67cfb14e615b9cf48b515384d77e0817, type: 3}
+      propertyPath: soundEffect
+      value: 
+      objectReference: {fileID: 8300000, guid: 77926f2ad1f189c40839d0f3fc2a9ced, type: 3}
+    - target: {fileID: 4424891087279982700, guid: 67cfb14e615b9cf48b515384d77e0817, type: 3}
+      propertyPath: audioSourceObj
+      value: 
+      objectReference: {fileID: 1624640231}
+    - target: {fileID: 4424891087279982700, guid: 67cfb14e615b9cf48b515384d77e0817, type: 3}
       propertyPath: textMeshObject
       value: 
       objectReference: {fileID: 1361763657}
@@ -370,7 +382,8 @@ MonoBehaviour:
   pickupRange: 3
   keybind: 101
   textMeshObject: {fileID: 1361763657}
-  monsterObject: {fileID: 0}
+  audioSourceObj: {fileID: 1624640231}
+  soundEffect: {fileID: 8300000, guid: 77926f2ad1f189c40839d0f3fc2a9ced, type: 3}
 --- !u!64 &67101541
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2338,7 +2351,8 @@ MonoBehaviour:
   pickupRange: 3
   keybind: 101
   textMeshObject: {fileID: 1361763657}
-  monsterObject: {fileID: 0}
+  audioSourceObj: {fileID: 1624640231}
+  soundEffect: {fileID: 8300000, guid: 77926f2ad1f189c40839d0f3fc2a9ced, type: 3}
 --- !u!65 &756552893
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2610,7 +2624,8 @@ MonoBehaviour:
   pickupRange: 3
   keybind: 101
   textMeshObject: {fileID: 1361763657}
-  monsterObject: {fileID: 0}
+  audioSourceObj: {fileID: 1624640231}
+  soundEffect: {fileID: 8300000, guid: 77926f2ad1f189c40839d0f3fc2a9ced, type: 3}
 --- !u!65 &799777293
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6167,7 +6182,8 @@ MonoBehaviour:
   pickupRange: 3
   keybind: 101
   textMeshObject: {fileID: 1361763657}
-  monsterObject: {fileID: 0}
+  audioSourceObj: {fileID: 1624640231}
+  soundEffect: {fileID: 8300000, guid: 77926f2ad1f189c40839d0f3fc2a9ced, type: 3}
 --- !u!65 &900339228
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7931,6 +7947,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 4424891087279982700, guid: 67cfb14e615b9cf48b515384d77e0817, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 1624640233}
+    - target: {fileID: 4424891087279982700, guid: 67cfb14e615b9cf48b515384d77e0817, type: 3}
+      propertyPath: soundEffect
+      value: 
+      objectReference: {fileID: 8300000, guid: 77926f2ad1f189c40839d0f3fc2a9ced, type: 3}
+    - target: {fileID: 4424891087279982700, guid: 67cfb14e615b9cf48b515384d77e0817, type: 3}
+      propertyPath: audioSourceObj
+      value: 
+      objectReference: {fileID: 1624640231}
     - target: {fileID: 4424891087279982700, guid: 67cfb14e615b9cf48b515384d77e0817, type: 3}
       propertyPath: textMeshObject
       value: 
@@ -9803,6 +9831,18 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4424891087279982700, guid: 67cfb14e615b9cf48b515384d77e0817, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 1624640233}
+    - target: {fileID: 4424891087279982700, guid: 67cfb14e615b9cf48b515384d77e0817, type: 3}
+      propertyPath: soundEffect
+      value: 
+      objectReference: {fileID: 8300000, guid: 77926f2ad1f189c40839d0f3fc2a9ced, type: 3}
+    - target: {fileID: 4424891087279982700, guid: 67cfb14e615b9cf48b515384d77e0817, type: 3}
+      propertyPath: audioSourceObj
+      value: 
+      objectReference: {fileID: 1624640231}
+    - target: {fileID: 4424891087279982700, guid: 67cfb14e615b9cf48b515384d77e0817, type: 3}
       propertyPath: textMeshObject
       value: 
       objectReference: {fileID: 1361763657}
@@ -10508,6 +10548,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 4424891087279982700, guid: 67cfb14e615b9cf48b515384d77e0817, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 1624640233}
+    - target: {fileID: 4424891087279982700, guid: 67cfb14e615b9cf48b515384d77e0817, type: 3}
+      propertyPath: soundEffect
+      value: 
+      objectReference: {fileID: 8300000, guid: 77926f2ad1f189c40839d0f3fc2a9ced, type: 3}
+    - target: {fileID: 4424891087279982700, guid: 67cfb14e615b9cf48b515384d77e0817, type: 3}
+      propertyPath: audioSourceObj
+      value: 
+      objectReference: {fileID: 1624640231}
     - target: {fileID: 4424891087279982700, guid: 67cfb14e615b9cf48b515384d77e0817, type: 3}
       propertyPath: textMeshObject
       value: 
