@@ -8,17 +8,26 @@ public class ItemPickup : MonoBehaviour
     private Transform playerCamera;
     private TextMeshProUGUI textMesh;
     private bool isHovering = false;
+    private AudioSource audioSource;
     public LayerMask pickupLayer;
     public float pickupRange = 3f;
     public KeyCode keybind = KeyCode.E;
     public GameObject textMeshObject;
-    public GameObject monsterObject; // so it gets more angry as the player progresses
+    public GameObject audioSourceObj;
+    public AudioClip soundEffect;
 
 
     void Start()
     {
         textMesh = textMeshObject.GetComponent<TextMeshProUGUI>();
         playerCamera = Camera.main.transform; // gets camera transform for ray casting
+
+        audioSource = audioSourceObj.GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+        audioSource.clip = soundEffect;
     }
 
     void Update()
@@ -46,6 +55,7 @@ public class ItemPickup : MonoBehaviour
 
     public virtual void PickupItem(GameObject obj) // logs pickup to console and deletes object
     {
+        PlaySound();
         Debug.Log("Picked up " + obj.name);
 
 
@@ -53,7 +63,7 @@ public class ItemPickup : MonoBehaviour
         Destroy(obj);
     }
 
-    void DisplayText(string name) // Display pickup info tip to screen
+    public void DisplayText(string name) // Display pickup info tip to screen
     {
         name = name.ToLower();
         textMesh.text = "Press 'E' to pickup " + name;
@@ -67,6 +77,18 @@ public class ItemPickup : MonoBehaviour
         {
             Debug.Log("Is NOT hovering");
             textMesh.enabled = false;
+        }
+    }
+
+    public void PlaySound()
+    {
+        if (audioSource != null && soundEffect != null)
+        {
+            audioSource.PlayOneShot(soundEffect);
+        }
+        else
+        {
+            Debug.LogWarning("AudioSource or AudioClip is not assigned.");
         }
     }
 }

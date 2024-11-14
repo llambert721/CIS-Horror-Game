@@ -1,6 +1,9 @@
+// Written by Amin Umer
+// 10/10/2024
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public enum FlashLightState
 {
@@ -16,7 +19,7 @@ public class PoweredFlashLight : MonoBehaviour
 
     [Header("Options")]
 
-    [Tooltip("The Speed that the battery is lost at")]  [Range(0.0f,2f)] [SerializeField] float batteryLossTick = 0.5f;
+    [Tooltip("The Speed that the battery is lost at")]  [Range(0.0f,10f)] [SerializeField] float batteryLossTick = 10f;
 
     [Tooltip("This is the amount of battery the player starts with.")] [SerializeField] int startBattery = 100;
 
@@ -33,9 +36,14 @@ public class PoweredFlashLight : MonoBehaviour
     [Tooltip("Light that will be shown if the flashlight is on.")] [SerializeField] GameObject FlashlightLight;
 
     [Tooltip("Sounds that will be played when the flashlight is toggled")] [SerializeField] AudioClip FlashlightOn_FX, FlashlightOff_FX;
+
+    public GameObject textMeshObject;
+    private TextMeshProUGUI textMesh;
+
     private void Start()
     {
-        currentBattery = startBattery; //Set the current battery to the start battery when the game starts
+        textMesh = textMeshObject.GetComponent<TextMeshProUGUI>();
+        currentBattery = startBattery; //Set the current batterwy to the start battery when the game starts
 
         InvokeRepeating(nameof(LoseBattery), 0, batteryLossTick); // Losses the battery at a set interval of time
     }
@@ -55,6 +63,8 @@ public class PoweredFlashLight : MonoBehaviour
             state = FlashLightState.Dead;
             flashlightIsOn = false; // Automatically turns flashlight off
         }
+
+        textMesh.text = $"Battery life: {currentBattery}%";
     }
 
     public void GainBattery(int amount) // Handles the gaining of battery

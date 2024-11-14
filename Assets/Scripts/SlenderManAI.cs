@@ -3,6 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class SlenderManAI : MonoBehaviour
 {
+    public Animator animator;
+    public Transform monsterPrefab;
     public Transform player; // Reference to the player's GameObject
     public float teleportDistance = 10f; // Maximum teleportation distance
     public float teleportCooldown = 5f; // Time between teleportation attempts
@@ -31,6 +33,7 @@ public class SlenderManAI : MonoBehaviour
 
     private void Start()
     {
+        animator = GetComponentInChildren<Animator>();
         baseTeleportSpot = transform.position;
         teleportTimer = teleportCooldown;
 
@@ -95,7 +98,7 @@ public class SlenderManAI : MonoBehaviour
                 staticObject.SetActive(false);
             }
         }
-
+        animator.SetFloat("Speed", navMeshAgent.speed);
         EnvironmentView();
         
     }
@@ -191,7 +194,8 @@ public class SlenderManAI : MonoBehaviour
         {
             Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
             targetRotation *= Quaternion.Euler(0, -120, 0); // rotates 90 degrees so it's facing player
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            monsterPrefab.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
     }
 }

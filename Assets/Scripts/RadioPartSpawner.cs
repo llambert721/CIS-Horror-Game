@@ -25,7 +25,7 @@ public class RadioPartSpawner : MonoBehaviour
 
         for (int i = 0; i < 3; i++)
         {
-            radioParts[i].transform.position = spawnPoints[i].position;
+            Spawn(spawnPoints[i], radioParts[i]);
         }
 
     }
@@ -39,6 +39,24 @@ public class RadioPartSpawner : MonoBehaviour
             int randomIndex = Random.Range(i, spawnPoints.Count);
             spawnPoints[i] = spawnPoints[randomIndex];
             spawnPoints[randomIndex] = temp;
+        }
+    }
+
+    void Spawn(Transform spawnPoint, GameObject spawnedObject)
+    {
+        spawnedObject.transform.position = spawnPoint.position;
+
+        RaycastHit hit;
+        if (Physics.Raycast(spawnPoint.position, Vector3.down, out hit))
+        {
+            // Move the object to sit flush with the table based on the hit point
+            Vector3 newPosition = hit.point;
+            newPosition.y += spawnedObject.GetComponent<Collider>().bounds.extents.y;
+            spawnedObject.transform.position = newPosition;
+        }
+        else
+        {
+            Debug.LogWarning("No table detected below the spawn point!");
         }
     }
 }
