@@ -25,7 +25,6 @@ public class PlayerFootsteps : MonoBehaviour
             // Check for tagged objects first
             if (hit.collider.CompareTag("Building"))
             {
-                Debug.Log("walking on building");
                 PlayRandomClip(building);
                 return;
             }
@@ -52,15 +51,12 @@ public class PlayerFootsteps : MonoBehaviour
             switch (dominantTexture)
             {
                 case 0:
-                    Debug.Log("walking on grass");
                     PlayRandomClip(grass);
                     break;
                 case 1:
-                    Debug.Log("walking on sand");
                     PlayRandomClip(grass);
                     break;
                 case 2:
-                    Debug.Log("walking on gravel");
                     PlayRandomClip(gravel);
                     break;
                 default:
