@@ -452,6 +452,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1352990758202211900, guid: 9cf63e2b497317149a4bae589a4b4047, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 1354141976217420908, guid: 9cf63e2b497317149a4bae589a4b4047, type: 3}
       propertyPath: m_LocalPosition.x
       value: 71.61421
@@ -798,15 +802,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 194581576}
   terrain: {fileID: 1695257938}
-  grass: {fileID: 0}
-  gravel: {fileID: 0}
-  sand: {fileID: 8300000, guid: 3f385a4fd5a07434b9fd4775faf6e3a9, type: 3}
-  building: {fileID: 0}
-  rayStart: {fileID: 0}
+  grass:
+  - {fileID: 8300000, guid: 67666b85bbf3b074cbcac9c51716836b, type: 3}
+  - {fileID: 8300000, guid: 0abbd275bb7b1af4a82f0bd5d706187e, type: 3}
+  - {fileID: 8300000, guid: 4c89cafbf8ec5664e893863ffafe6c4c, type: 3}
+  - {fileID: 8300000, guid: a2807ebc9e9de644dbb7423330aa2fc9, type: 3}
+  - {fileID: 8300000, guid: f328e222029856a4d82f21cc486b3423, type: 3}
+  gravel:
+  - {fileID: 8300000, guid: 71995b5448dd83942901eb49388d5b6e, type: 3}
+  - {fileID: 8300000, guid: 9d59aa7b1a365fb4aaa763c4425a2837, type: 3}
+  - {fileID: 8300000, guid: c72fbbea113587b47ba6e96811f5ba9a, type: 3}
+  - {fileID: 8300000, guid: f6b22cba36a6e1c4596492db810f1298, type: 3}
+  - {fileID: 8300000, guid: e65a1383935308c49a38f4a12534a974, type: 3}
+  building:
+  - {fileID: 8300000, guid: aa8269c444b8d4247a357bee4b467586, type: 3}
+  - {fileID: 8300000, guid: 1321f408fe4831547977d0ce1a25479b, type: 3}
+  - {fileID: 8300000, guid: 7320817e73734094193c47470c369367, type: 3}
+  - {fileID: 8300000, guid: 38d121937915f22498a6be872402d270, type: 3}
+  - {fileID: 8300000, guid: 6334b905e338e724981a2b6a8dbf381f, type: 3}
+  rayStart: {fileID: 1252258563}
   range: 3
   layerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1088
 --- !u!1 &236599402 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: af82087f1d2173c4e8c11c42d888906c, type: 3}
@@ -1975,6 +1993,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1352990758202211900, guid: 9cf63e2b497317149a4bae589a4b4047, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 1354141976217420908, guid: 9cf63e2b497317149a4bae589a4b4047, type: 3}
       propertyPath: m_LocalPosition.x
       value: 19.296951
@@ -2442,7 +2464,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &745481383
 Transform:
   m_ObjectHideFlags: 0
@@ -2590,6 +2612,10 @@ PrefabInstance:
     - target: {fileID: 4213951705743829736, guid: 9400f0bc87cdf26428d6a26ee13deda9, type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4213951705743829736, guid: 9400f0bc87cdf26428d6a26ee13deda9, type: 3}
+      propertyPath: m_TagString
+      value: Building
       objectReference: {fileID: 0}
     - target: {fileID: 4657643824157457333, guid: 9400f0bc87cdf26428d6a26ee13deda9, type: 3}
       propertyPath: m_Layer
@@ -3108,10 +3134,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 7636ead9f4c9c404da928a652d38a12a, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 86947de8efa7420428373f6dbea4403e, type: 3}
+  m_audioClip: {fileID: 8300000, guid: a62644a004f6e8942bab006735019628, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 0.025
+  m_Volume: 0.201
+  m_Pitch: 1
   Loop: 1
   Mute: 0
   Spatialize: 0
@@ -6289,7 +6315,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 2006993557}
-  m_VersionIndex: 10
+  m_VersionIndex: 13
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -6376,6 +6402,10 @@ PrefabInstance:
     - target: {fileID: 1725396590599028762, guid: fbd56508bdf8571439d8b91aa65d9d08, type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725396590599028762, guid: fbd56508bdf8571439d8b91aa65d9d08, type: 3}
+      propertyPath: m_TagString
+      value: Building
       objectReference: {fileID: 0}
     - target: {fileID: 1728817177789119050, guid: fbd56508bdf8571439d8b91aa65d9d08, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7487,6 +7517,10 @@ PrefabInstance:
     - target: {fileID: 1352990758202211900, guid: 9cf63e2b497317149a4bae589a4b4047, type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352990758202211900, guid: 9cf63e2b497317149a4bae589a4b4047, type: 3}
+      propertyPath: m_TagString
+      value: Building
       objectReference: {fileID: 0}
     - target: {fileID: 1354141976217420908, guid: 9cf63e2b497317149a4bae589a4b4047, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10554,6 +10588,10 @@ PrefabInstance:
     - target: {fileID: 1725396590599028762, guid: fbd56508bdf8571439d8b91aa65d9d08, type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725396590599028762, guid: fbd56508bdf8571439d8b91aa65d9d08, type: 3}
+      propertyPath: m_TagString
+      value: Building
       objectReference: {fileID: 0}
     - target: {fileID: 1728817177789119050, guid: fbd56508bdf8571439d8b91aa65d9d08, type: 3}
       propertyPath: m_LocalPosition.x

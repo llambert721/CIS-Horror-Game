@@ -151,7 +151,7 @@ public class SlenderManAI : MonoBehaviour
         if (Vector3.Distance(transform.position, player.position) <= 1f)
         {
             //Goes to deathscene when player gets touched
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene("JumpScare");
         }
     }
 

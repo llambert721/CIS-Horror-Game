@@ -7,15 +7,16 @@ public class PlayerFootsteps : MonoBehaviour
     public AudioSource audioSource;
     public Terrain terrain;
 
-    public AudioClip grass;
-    public AudioClip gravel;
-    public AudioClip sand;
-    public AudioClip building;
+    public AudioClip[] grass;
+    public AudioClip[] gravel;
+    public AudioClip[] building;
 
     RaycastHit hit;
     public Transform rayStart;
     public float range;
     public LayerMask layerMask;
+
+    private Dictionary<AudioClip[], int> lastPlayedIndices = new Dictionary<AudioClip[], int>();
 
     public void FootStep()
     {
@@ -24,7 +25,7 @@ public class PlayerFootsteps : MonoBehaviour
             // Check for tagged objects first
             if (hit.collider.CompareTag("Building"))
             {
-                PlayFootStepSoundL(building);
+                PlayRandomClip(building);
                 return;
             }
 
@@ -50,13 +51,13 @@ public class PlayerFootsteps : MonoBehaviour
             switch (dominantTexture)
             {
                 case 0:
-                    PlayFootStepSoundL(sand);
+                    PlayRandomClip(grass);
                     break;
                 case 1:
-                    PlayFootStepSoundL(grass);
+                    PlayRandomClip(grass);
                     break;
                 case 2:
-                    PlayFootStepSoundL(gravel);
+                    PlayRandomClip(gravel);
                     break;
                 default:
                     break;
@@ -69,9 +70,23 @@ public class PlayerFootsteps : MonoBehaviour
         audioSource.pitch = Random.Range(0.8f, 1f);
         audioSource.PlayOneShot(audioClip);
     }
-
-    private void Update()
+    private void PlayRandomClip(AudioClip[] clips)
     {
-        FootStep();
+        if (clips.Length == 0) return;
+
+        // Get the last index from the dictionary or set it to -1 if it doesn't exist
+        int lastIndex = lastPlayedIndices.ContainsKey(clips) ? lastPlayedIndices[clips] : -1;
+
+        int newIndex;
+        do
+        {
+            newIndex = Random.Range(0, clips.Length);
+        } while (newIndex == lastIndex);
+
+        // Update the dictionary with the new last index
+        lastPlayedIndices[clips] = newIndex;
+
+        audioSource.pitch = Random.Range(0.8f, 1f);
+        audioSource.PlayOneShot(clips[newIndex]);
     }
 }
