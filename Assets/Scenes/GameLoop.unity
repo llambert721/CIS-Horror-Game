@@ -1319,7 +1319,6 @@ MonoBehaviour:
   monsterPrefab: {fileID: 1811959514}
   player: {fileID: 1252258563}
   teleportDistance: 20
-  teleportCooldown: 30
   returnCooldown: 10
   rotationSpeed: 5
   teleportSound: {fileID: 8300000, guid: c56b3ed1e93aa184b85aafb666cafc6b, type: 3}
@@ -1367,7 +1366,7 @@ Transform:
   m_GameObject: {fileID: 236599402}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 107.6, y: 2.94, z: 58.26}
+  m_LocalPosition: {x: 222.123, y: 9.79, z: 214.16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1857,6 +1856,7 @@ MonoBehaviour:
   totalTime: 300
   timerEnded: 0
   fadeDuration: 2
+  monsterObject: {fileID: 236599402}
 --- !u!1001 &315460856
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2375,15 +2375,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: af82087f1d2173c4e8c11c42d888906c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 107.6
+      value: 222.123
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: af82087f1d2173c4e8c11c42d888906c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.94
+      value: 9.79
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: af82087f1d2173c4e8c11c42d888906c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 58.26
+      value: 214.16
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: af82087f1d2173c4e8c11c42d888906c, type: 3}
       propertyPath: m_LocalRotation.w
