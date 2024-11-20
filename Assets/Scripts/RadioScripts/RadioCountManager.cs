@@ -15,10 +15,14 @@ public class RadioCountManager : MonoBehaviour
     private TextMeshProUGUI textMesh;
     private TextMeshProUGUI message;
 
+    public GameObject monsterObject;
+    SlenderManAI monster;
+
     void Start()
     {
         textMesh = textMeshObject.GetComponent<TextMeshProUGUI>();
         message = messageObject.GetComponent<TextMeshProUGUI>();
+        monster = monsterObject.GetComponent<SlenderManAI>();
 
         messageObject.SetActive(true);
         message.enabled = false;
@@ -27,6 +31,7 @@ public class RadioCountManager : MonoBehaviour
     public void AddRadio()
     {
         count++;
+        monster.SetDifficulty(count);
     }
 
     public bool IsRadioPartsCollected()
@@ -41,6 +46,7 @@ public class RadioCountManager : MonoBehaviour
 
     public void StartEndGame()
     {
+        AddRadio(); // tom put this here so it increases the difficulty to HUNT MODE when you enter endgame
         message.text = "Survive and make it to the beach...";
         message.enabled = true;
 

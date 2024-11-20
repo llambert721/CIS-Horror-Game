@@ -7,7 +7,7 @@ public class SlenderManAI : MonoBehaviour
     public Transform monsterPrefab;
     public Transform player; // Reference to the player's GameObject
     public float teleportDistance = 10f; // Maximum teleportation distance
-    public float teleportCooldown = 5f; // Time between teleportation attempts
+    private float teleportCooldown = 5f; // Time between teleportation attempts
     public float returnCooldown = 10f; // Time before returning to base spot
     [Range(0f, 1f)] private float chaseProbability = 0.65f; // Probability of chasing the player
     public float rotationSpeed = 5f; // Rotation speed when looking at the player
@@ -17,7 +17,7 @@ public class SlenderManAI : MonoBehaviour
     public GameObject staticObject; // Reference to the "static" GameObject
     public float staticActivationRange = 5f; // Range at which "static" should be activated
 
-    private Vector3 baseTeleportSpot;
+    private Vector3 monsterSpawnpoint;
     private float teleportTimer;
     private bool returningToBase;
     public LayerMask groundLayer;
@@ -26,15 +26,19 @@ public class SlenderManAI : MonoBehaviour
     public LayerMask obstacleMask;
     public UnityEngine.AI.NavMeshAgent navMeshAgent;
     private bool isChasing; // is chasing when it's teleported to you and angry
-    private float runSpeed = 2.8f;
+    private float runSpeed = 2.3f;
     public Transform[] waypoints;
     int currentWaypointIndex = 0;
     // private float angryRunSpeed = 4.2f; not used yet
 
+    private float[] teleportCooldowns = { 60, 50, 40, 30, 5 };
+    private float[] chaseProbabilities = { 0.4f, 0.5f, 0.6f, 0.7f, 0.65f };
+
     private void Start()
     {
         animator = GetComponentInChildren<Animator>();
-        baseTeleportSpot = transform.position;
+        monsterSpawnpoint = transform.position;
+        SetDifficulty(0);
         teleportTimer = teleportCooldown;
 
         // Get or add an AudioSource component
@@ -56,10 +60,9 @@ public class SlenderManAI : MonoBehaviour
 
     private void Update()
     {
-
         if (player == null)
         {
-           
+            
             return;
         }
 
@@ -70,14 +73,13 @@ public class SlenderManAI : MonoBehaviour
             if (returningToBase)
             {
                 TeleportToBaseSpot();
-                teleportTimer = returnCooldown;
                 returningToBase = false;
             }
             else
             {
                 DecideTeleportAction();
-                teleportTimer = teleportCooldown;
             }
+            teleportTimer = teleportCooldown;
         }
 
         RotateTowardsPlayer();
@@ -103,9 +105,23 @@ public class SlenderManAI : MonoBehaviour
         
     }
 
+    public void SetDifficulty(int count)
+    {
+        SetChaseProbability(chaseProbabilities[count]);
+        SetTeleportCooldown(teleportCooldowns[count]);
+        teleportTimer = teleportCooldown; // do this so it resets the timer
+    }
+
     private void SetChaseProbability(float newProbability)
     {
         chaseProbability = newProbability;
+        Debug.Log("Chase Probability: " + chaseProbability);
+    }
+
+    private void SetTeleportCooldown(float newCooldown)
+    {
+        teleportCooldown = newCooldown;
+        Debug.Log("Teleport Cooldown: " + teleportCooldown);
     }
 
     private void DecideTeleportAction()
@@ -118,7 +134,7 @@ public class SlenderManAI : MonoBehaviour
         }
         else
         {
-            TeleportToBaseSpot();
+            // TeleportToBaseSpot(); // this means that it'll randomly decide to teleport to its spawnpoint sometimes
         }
     }
 
@@ -131,7 +147,7 @@ public class SlenderManAI : MonoBehaviour
 
     void EnvironmentView()
     {
-        Collider[] playerInRange = Physics.OverlapSphere(transform.position, 25f, playerMask);
+        Collider[] playerInRange = Physics.OverlapSphere(transform.position, 12f, playerMask);
 
         for(int i = 0; i < playerInRange.Length; i++)
         {
@@ -140,7 +156,7 @@ public class SlenderManAI : MonoBehaviour
             Vector3 dirToPlayer = (player.position - transform.position).normalized;
             float distanceToPlayer = Vector3.Distance(transform.position, player.position);
         }
-        if (Vector3.Distance(transform.position, player.position) >= 25f)
+        if (Vector3.Distance(transform.position, player.position) >= 12f)
         {
             StopChasing();
         }
@@ -165,6 +181,10 @@ public class SlenderManAI : MonoBehaviour
     {
         Vector3 randomPosition = player.position + Random.onUnitSphere * teleportDistance;
 
+        // start timer for teleporting back to spawnpoint
+        returningToBase = true;
+        teleportTimer = returnCooldown;
+
         RaycastHit hit;
         if (Physics.Raycast(randomPosition + Vector3.up * 10f, Vector3.down, out hit, Mathf.Infinity, groundLayer))
         {
@@ -180,8 +200,8 @@ public class SlenderManAI : MonoBehaviour
 
     private void TeleportToBaseSpot()
     {
-        transform.position = baseTeleportSpot;
-        returningToBase = true;
+        transform.position = monsterSpawnpoint;
+        returningToBase = false;
         StopChasing();
     }
 
