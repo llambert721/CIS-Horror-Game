@@ -68,6 +68,8 @@ public class PlaceParts : MonoBehaviour
                             childRend.enabled = true;
                         }
 
+                        FindObjectOfType<RadioCountManager>().StartEndGame();
+
                         hasPlacedParts = true;
                     }
                     else

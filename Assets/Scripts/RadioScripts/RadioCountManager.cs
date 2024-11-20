@@ -14,6 +14,7 @@ public class RadioCountManager : MonoBehaviour
 
     private TextMeshProUGUI textMesh;
     private TextMeshProUGUI message;
+    private Color originalColor;
 
     public GameObject monsterObject;
     SlenderManAI monster;
@@ -26,6 +27,7 @@ public class RadioCountManager : MonoBehaviour
 
         messageObject.SetActive(true);
         message.enabled = false;
+        originalColor = message.color;
     }
 
     public void AddRadio()
@@ -47,11 +49,19 @@ public class RadioCountManager : MonoBehaviour
     public void StartEndGame()
     {
         AddRadio(); // tom put this here so it increases the difficulty to HUNT MODE when you enter endgame
-        message.text = "Survive and make it to the beach...";
+        message.text = "Survive and make it to the water...";
         message.enabled = true;
 
         StartCoroutine(FadeOutAfterDelay(5f));
         StartCoroutine(StartCountdown());
+    }
+
+    public void GlobalMessage()
+    {
+        message.text = "Get to the radio tower...";
+        message.enabled = true;
+
+        StartCoroutine(FadeOutAfterDelay(5f));
     }
 
     IEnumerator StartCountdown()
@@ -90,7 +100,6 @@ public class RadioCountManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         float elapsedTime = 0f;
-        Color originalColor = message.color;
 
         while (elapsedTime < fadeDuration)
         {
@@ -101,6 +110,8 @@ public class RadioCountManager : MonoBehaviour
         }
 
         message.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0f);  // Ensure it's fully transparent at the end
+        message.enabled = false;
+        message.color = originalColor;
     }
 
     public bool IsTimerEnded()
