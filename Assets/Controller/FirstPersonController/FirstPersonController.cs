@@ -17,6 +17,9 @@ using UnityEngine.UI;
 public class FirstPersonController : MonoBehaviour
 {
     private Rigidbody rb;
+    private float footstepInterval = 0.8f; // Time between steps
+    private float footstepTimer = 0f;
+    private PlayerFootsteps footsteps;
 
     #region Camera Movement Variables
 
@@ -165,6 +168,8 @@ public class FirstPersonController : MonoBehaviour
         {
             crosshairObject.gameObject.SetActive(false);
         }
+
+        footsteps = FindObjectOfType<PlayerFootsteps>();
 
         #region Sprint Bar
 
@@ -365,6 +370,31 @@ public class FirstPersonController : MonoBehaviour
         if(enableHeadBob)
         {
             HeadBob();
+        }
+
+        bool isPlayerMoving = rb.velocity.magnitude > 0.1f;
+
+        if (isSprinting) // Check based on your movement logic
+        {
+            footstepTimer += Time.deltaTime;
+            if (footstepTimer >= footstepInterval - 0.4f)
+            {
+                footsteps.FootStep();
+                footstepTimer = 0f;
+            }
+        }
+        else if (isWalking)
+        {
+            footstepTimer += Time.deltaTime;
+            if (footstepTimer >= footstepInterval)
+            {
+                footsteps.FootStep();
+                footstepTimer = 0f;
+            }
+        }
+        else
+        {
+            footstepTimer = 0f; // Reset timer if the player stops moving
         }
     }
 
