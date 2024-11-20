@@ -14,12 +14,12 @@ public class DeathScreen : MonoBehaviour
     //Restarts the game
     public void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        SceneManager.LoadScene("GameLoop");
     }
     //Sets the game to the main menu
     public void MainMenu()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 2);
+        SceneManager.LoadScene("MainMenu");
     }
     //Quits the game
     public void QuitGame()

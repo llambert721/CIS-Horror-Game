@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/JumpScare.unity
     guid: 2bf4a2dcf27486c40a705e9b016ba896
+  - enabled: 1
+    path: Assets/Scenes/WinScreen.unity
+    guid: aff10133f1276644cacd7d6a66ae9529
   m_configObjects: {}
