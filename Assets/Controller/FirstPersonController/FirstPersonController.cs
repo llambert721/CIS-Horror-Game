@@ -404,85 +404,55 @@ public class FirstPersonController : MonoBehaviour
 
         if (playerCanMove)
         {
-            // Calculate how fast we should be moving
-            Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            // Get input direction
+            Vector3 inputDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+            inputDirection.Normalize();
 
-            // Important to normalize it so it's not faster to move diagonally
-            targetVelocity.Normalize();
+            // Transform direction into local space
+            Vector3 targetVelocity = transform.TransformDirection(inputDirection);
 
-            // Checks if player is walking and isGrounded
-            // Will allow head bob
-            if (targetVelocity.x != 0 || targetVelocity.z != 0 && isGrounded)
+            if (inputDirection.magnitude > 0)
             {
-                isWalking = true;
-            }
-            else
-            {
-                isWalking = false;
-            }
-
-            // Apply speed changes based on crouch or sprint
-            if (isCrouched)
-            {
-                // When crouched, reduce speed
-                targetVelocity = transform.TransformDirection(targetVelocity) * (walkSpeed * speedReduction); // Slow down when crouched
-
-                // Apply a force that attempts to reach our target velocity
-                Vector3 velocity = rb.velocity;
-                Vector3 velocityChange = (targetVelocity - velocity);
-                velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
-                velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
-                velocityChange.y = 0;
-
-                rb.AddForce(velocityChange, ForceMode.VelocityChange);
-            }
-            else if (enableSprint && Input.GetKey(sprintKey) && sprintRemaining > 0f && !isSprintCooldown)
-            {
-                // Sprinting logic
-                targetVelocity = transform.TransformDirection(targetVelocity) * sprintSpeed;
-
-                // Apply a force that attempts to reach our target velocity
-                Vector3 velocity = rb.velocity;
-                Vector3 velocityChange = (targetVelocity - velocity);
-                velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
-                velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
-                velocityChange.y = 0;
-
-                // Sprinting triggers FOV change and HUD elements
-                if (velocityChange.x != 0 || velocityChange.z != 0)
+                // Apply movement modifiers
+                if (isCrouched)
                 {
+                    targetVelocity *= walkSpeed * speedReduction;
+                }
+                else if (enableSprint && Input.GetKey(sprintKey) && sprintRemaining > 0f && !isSprintCooldown)
+                {
+                    targetVelocity *= sprintSpeed;
                     isSprinting = true;
-                    isCrouched = false; // Cancel crouch if sprinting
+                    isCrouched = false;
 
                     if (hideBarWhenFull && !unlimitedSprint)
                     {
                         sprintBarCG.alpha += 5 * Time.deltaTime;
                     }
                 }
+                else
+                {
+                    targetVelocity *= walkSpeed;
+                    isSprinting = false;
+                }
 
-                rb.AddForce(velocityChange, ForceMode.VelocityChange);
+                isWalking = isGrounded;
+
+                // Apply velocity directly
+                Vector3 velocity = rb.velocity;
+                rb.velocity = new Vector3(targetVelocity.x, velocity.y, targetVelocity.z); // Preserve vertical motion
             }
             else
             {
-                // Regular walking
+                // Stop horizontal movement instantly
+                rb.velocity = new Vector3(0, rb.velocity.y, 0); // Only retain vertical velocity
+
+                isWalking = false;
                 isSprinting = false;
 
-                // Hide sprint bar when not needed
                 if (hideBarWhenFull && sprintRemaining == sprintDuration)
                 {
                     sprintBarCG.alpha -= 3 * Time.deltaTime;
                 }
-
-                targetVelocity = transform.TransformDirection(targetVelocity) * walkSpeed;
-
-                // Apply a force that attempts to reach our target velocity
-                Vector3 velocity = rb.velocity;
-                Vector3 velocityChange = (targetVelocity - velocity);
-                velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
-                velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
-                velocityChange.y = 0;
-
-                rb.AddForce(velocityChange, ForceMode.VelocityChange);
             }
         }
 
