@@ -1396,7 +1396,6 @@ MonoBehaviour:
   teleportDistance: 20
   returnCooldown: 10
   rotationSpeed: 5
-  teleportSound: {fileID: 8300000, guid: c56b3ed1e93aa184b85aafb666cafc6b, type: 3}
   staticObject: {fileID: 0}
   staticActivationRange: 5
   groundLayer:

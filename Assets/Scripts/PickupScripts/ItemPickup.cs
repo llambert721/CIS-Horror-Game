@@ -56,7 +56,6 @@ public class ItemPickup : MonoBehaviour
     public virtual void PickupItem(GameObject obj) // logs pickup to console and deletes object
     {
         PlaySound();
-        Debug.Log("Picked up " + obj.name);
 
 
 
@@ -70,12 +69,10 @@ public class ItemPickup : MonoBehaviour
 
         if (isHovering)
         {
-            Debug.Log("Is Hovering");
             textMesh.enabled = true;
         }
         else
         {
-            Debug.Log("Is NOT hovering");
             textMesh.enabled = false;
         }
     }
