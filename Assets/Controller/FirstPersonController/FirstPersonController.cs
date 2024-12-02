@@ -90,6 +90,9 @@ public class FirstPersonController : MonoBehaviour
     private bool isSprintCooldown = false;
     private float sprintCooldownReset;
 
+    // Variables for monster detection
+    public float playerSoundRadius;
+
     #endregion
 
     #region Jump
@@ -399,6 +402,7 @@ public class FirstPersonController : MonoBehaviour
 
                 // Apply a force that attempts to reach our target velocity
                 Vector3 velocity = rb.velocity;
+                playerSoundRadius = velocity.magnitude * 3; // how far away the monster can hear you/how loud you are
                 Vector3 velocityChange = (targetVelocity - velocity);
                 velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
                 velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
@@ -413,6 +417,7 @@ public class FirstPersonController : MonoBehaviour
 
                 // Apply a force that attempts to reach our target velocity
                 Vector3 velocity = rb.velocity;
+                playerSoundRadius = velocity.magnitude * 3; // how far away the monster can hear you/how loud you are
                 Vector3 velocityChange = (targetVelocity - velocity);
                 velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
                 velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
@@ -447,6 +452,7 @@ public class FirstPersonController : MonoBehaviour
 
                 // Apply a force that attempts to reach our target velocity
                 Vector3 velocity = rb.velocity;
+                playerSoundRadius = velocity.magnitude * 3; // how far away the monster can hear you/how loud you are
                 Vector3 velocityChange = (targetVelocity - velocity);
                 velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
                 velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
