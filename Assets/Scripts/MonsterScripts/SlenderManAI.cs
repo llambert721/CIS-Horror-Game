@@ -33,8 +33,13 @@ public class SlenderManAI : MonoBehaviour
     private float[] teleportCooldowns = { 60, 50, 40, 30, 5 };
     private float[] chaseProbabilities = { 0.4f, 0.5f, 0.6f, 0.7f, 0.65f };
 
+    private float footstepInterval = 1f; // Time between steps
+    private float footstepTimer = 0f;
+    private MonsterFootsteps footsteps;
+
     private void Start()
     {
+        footsteps = FindObjectOfType<MonsterFootsteps>();
         animator = GetComponentInChildren<Animator>();
         monsterSpawnpoint = transform.position;
         SetDifficulty(0);
@@ -100,6 +105,16 @@ public class SlenderManAI : MonoBehaviour
         animator.SetFloat("Speed", navMeshAgent.speed);
         EnvironmentView();
         
+        if (navMeshAgent.isStopped == false)
+        {
+            footstepTimer += Time.deltaTime;
+            if (footstepTimer >= footstepInterval - 0.4f)
+            {
+                footsteps.Footstep();
+                footstepTimer = 0f;
+            }
+        }
+        else { footstepTimer = 0f; }
     }
 
     public void SetDifficulty(int count)
