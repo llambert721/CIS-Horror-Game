@@ -19,9 +19,15 @@ TagManager:
   - Battery
   - Player
   - Obstacles
+<<<<<<< Updated upstream
   - 
   - 
   - 
+=======
+  - Radio
+  - Interact
+  - Projectile
+>>>>>>> Stashed changes
   - 
   - 
   - 

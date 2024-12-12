@@ -134,6 +134,9 @@ public class FirstPersonController : MonoBehaviour
 
     #endregion
 
+    // Stealth variables
+    public float noiseLevel = 0f;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -460,13 +463,14 @@ public class FirstPersonController : MonoBehaviour
 
                 rb.AddForce(velocityChange, ForceMode.VelocityChange);
             }
+            noiseLevel = rb.velocity.magnitude;
         }
 
         #endregion
     }
 
-    // Sets isGrounded based on a raycast sent straigth down from the player object
-    private void CheckGround()
+        // Sets isGrounded based on a raycast sent straigth down from the player object
+        private void CheckGround()
     {
         Vector3 origin = new Vector3(transform.position.x, transform.position.y - (transform.localScale.y * .5f), transform.position.z);
         Vector3 direction = transform.TransformDirection(Vector3.down);

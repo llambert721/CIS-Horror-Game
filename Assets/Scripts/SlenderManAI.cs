@@ -22,6 +22,7 @@ public class SlenderManAI : MonoBehaviour
     private bool returningToBase;
     public LayerMask groundLayer;
 
+<<<<<<< Updated upstream:Assets/Scripts/SlenderManAI.cs
     private float footstepInterval = 0.8f; // Time between steps
     private float footstepTimer = 0f;
     private MonsterFootsteps footsteps;
@@ -48,6 +49,30 @@ public class SlenderManAI : MonoBehaviour
 
     private void Start()
     {
+=======
+    public LayerMask playerMask;
+    public LayerMask obstacleMask;
+    public UnityEngine.AI.NavMeshAgent navMeshAgent;
+    private bool isChasing; // is chasing when it's teleported to you and angry
+    private float runSpeed = 2.3f;
+    public Transform[] waypoints;
+    int currentWaypointIndex = 0;
+    private bool justTeleported = false;
+    // private float angryRunSpeed = 4.2f; not used yet
+
+    private float[] teleportCooldowns = { 60, 50, 40, 30, 5 }; // 60, 50, 40, 30, 5
+    private float[] chaseProbabilities = { 0.6f, 0.7f, 0.8f, 0.9f, 0.65f }; // 0.4f, 0.5f, 0.6f, 0.7f, 0.65f
+    private float footstepInterval = 1f; // Time between steps
+    private float footstepTimer = 0f;
+    private MonsterFootsteps footsteps;
+
+    private FirstPersonController playerScriptObject;
+
+    private void Start()
+    {
+        footsteps = FindObjectOfType<MonsterFootsteps>();
+        playerScriptObject = FindObjectOfType<FirstPersonController>();
+>>>>>>> Stashed changes:Assets/Scripts/MonsterScripts/SlenderManAI.cs
         animator = GetComponentInChildren<Animator>();
 <<<<<<< Updated upstream:Assets/Scripts/SlenderManAI.cs
         baseTeleportSpot = transform.position;
@@ -55,6 +80,7 @@ public class SlenderManAI : MonoBehaviour
         playerObject = playerClass.GetComponent<FirstPersonController>();
         footsteps = FindObjectOfType<MonsterFootsteps>();
         monsterSpawnpoint = transform.position;
+        
         SetDifficulty(0);
 >>>>>>> Stashed changes:Assets/Scripts/MonsterScripts/SlenderManAI.cs
         teleportTimer = teleportCooldown;
@@ -102,7 +128,7 @@ public class SlenderManAI : MonoBehaviour
             }
         }
 
-        RotateTowardsPlayer();
+        RotateTowardsTarget();
 
         // Check player distance and toggle the "static" object accordingly
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
@@ -181,15 +207,36 @@ public class SlenderManAI : MonoBehaviour
         navMeshAgent.SetDestination(player.position);
     }
 
+    public void TryAlert(Vector3 location)
+    {
+        if(Vector3.Distance(transform.position, location) <= 15f)
+        {
+            Alert(location);
+        }
+    }
+
+    public void Alert(Vector3 location)
+    {
+        navMeshAgent.isStopped = false;
+        navMeshAgent.speed = runSpeed;
+        navMeshAgent.SetDestination(location);
+    }
+
     void EnvironmentView()
     {
+<<<<<<< Updated upstream:Assets/Scripts/SlenderManAI.cs
 <<<<<<< Updated upstream:Assets/Scripts/SlenderManAI.cs
         Collider[] playerInRange = Physics.OverlapSphere(transform.position, 25f, playerMask);
 =======
         Collider[] playerInRange = Physics.OverlapSphere(transform.position, playerObject.playerSoundRadius, playerMask);
 >>>>>>> Stashed changes:Assets/Scripts/MonsterScripts/SlenderManAI.cs
+=======
+        float noiseLevel = playerScriptObject.noiseLevel * 3; // can be heard from 1.95m, 7.5m, or 15m away
+        /*
+        Collider[] playerInRange = Physics.OverlapSphere(transform.position, noiseLevel, playerMask);
+>>>>>>> Stashed changes:Assets/Scripts/MonsterScripts/SlenderManAI.cs
 
-        for(int i = 0; i < playerInRange.Length; i++)
+        for (int i = 0; i < playerInRange.Length; i++)
         {
             Debug.Log("monster senses the player");
             Transform playerTransform = playerInRange[i].transform;
@@ -197,9 +244,15 @@ public class SlenderManAI : MonoBehaviour
             float distanceToPlayer = Vector3.Distance(transform.position, player.position);
         }
 <<<<<<< Updated upstream:Assets/Scripts/SlenderManAI.cs
+<<<<<<< Updated upstream:Assets/Scripts/SlenderManAI.cs
         if (Vector3.Distance(transform.position, player.position) >= 25f)
 =======
         if (Vector3.Distance(transform.position, player.position) >= playerObject.playerSoundRadius && !justTeleported)
+>>>>>>> Stashed changes:Assets/Scripts/MonsterScripts/SlenderManAI.cs
+=======
+        */
+        
+        if (Vector3.Distance(transform.position, player.position) >= noiseLevel && !justTeleported)
 >>>>>>> Stashed changes:Assets/Scripts/MonsterScripts/SlenderManAI.cs
         {
             StopChasing();
@@ -224,8 +277,12 @@ public class SlenderManAI : MonoBehaviour
 
     private void StopChasing()
     {
-        navMeshAgent.isStopped = true;
-        navMeshAgent.speed = 0;
+        if (Vector3.Distance(transform.position, navMeshAgent.destination) <= 0.25f)
+        {
+            Debug.Log("Monster has reached its destination");
+            navMeshAgent.isStopped = true;
+            navMeshAgent.speed = 0;
+        }
     }
 
     public void LookingPlayer(Vector3 player)
@@ -300,17 +357,17 @@ public class SlenderManAI : MonoBehaviour
         StopChasing();
     }
 
-    private void RotateTowardsPlayer()
+    private void RotateTowardsTarget()
     {
-        Vector3 directionToPlayer = player.position - transform.position;
-        directionToPlayer.y = 0f; // Ignore the vertical component
+        Vector3 directionToTarget = navMeshAgent.destination - transform.position;
+        directionToTarget.y = 0f; // Ignore the vertical component
 
-        if (directionToPlayer != Vector3.zero)
+        if (directionToTarget != Vector3.zero)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
-            targetRotation *= Quaternion.Euler(0, -120, 0); // rotates 90 degrees so it's facing player
+            Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
+            targetRotation *= Quaternion.Euler(0, -120, 0); // rotates 90 degrees so it's facing target
             //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-            monsterPrefab.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
     }
 }
