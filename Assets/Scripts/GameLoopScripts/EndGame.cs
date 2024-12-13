@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+// Written by Logan Lambert
+
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
