@@ -124,6 +124,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7774332869367803375, guid: 9400f0bc87cdf26428d6a26ee13deda9, type: 3}
+      propertyPath: cooldownTime
+      value: 1.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 7380527229882170010, guid: 9400f0bc87cdf26428d6a26ee13deda9, type: 3}

@@ -11,7 +11,6 @@ public class SlenderManAI : MonoBehaviour
     public float returnCooldown = 10f; // Time before returning to base spot
     [Range(0f, 1f)] private float chaseProbability = 0.65f; // Probability of chasing the player
     public float rotationSpeed = 5f; // Rotation speed when looking at the player
-    public AudioClip teleportSound; // Reference to the teleport sound effect
     private AudioSource audioSource;
 
     public GameObject staticObject; // Reference to the "static" GameObject
@@ -34,8 +33,13 @@ public class SlenderManAI : MonoBehaviour
     private float[] teleportCooldowns = { 60, 50, 40, 30, 5 };
     private float[] chaseProbabilities = { 0.4f, 0.5f, 0.6f, 0.7f, 0.65f };
 
+    private float footstepInterval = 1f; // Time between steps
+    private float footstepTimer = 0f;
+    private MonsterFootsteps footsteps;
+
     private void Start()
     {
+        footsteps = FindObjectOfType<MonsterFootsteps>();
         animator = GetComponentInChildren<Animator>();
         monsterSpawnpoint = transform.position;
         SetDifficulty(0);
@@ -48,8 +52,6 @@ public class SlenderManAI : MonoBehaviour
             audioSource = gameObject.AddComponent<AudioSource>();
         }
 
-        // Set the teleport sound
-        audioSource.clip = teleportSound;
 
         // Ensure the "static" object is initially turned off
         if (staticObject != null)
@@ -103,6 +105,16 @@ public class SlenderManAI : MonoBehaviour
         animator.SetFloat("Speed", navMeshAgent.speed);
         EnvironmentView();
         
+        if (navMeshAgent.isStopped == false)
+        {
+            footstepTimer += Time.deltaTime;
+            if (footstepTimer >= footstepInterval - 0.4f)
+            {
+                footsteps.Footstep();
+                footstepTimer = 0f;
+            }
+        }
+        else { footstepTimer = 0f; }
     }
 
     public void SetDifficulty(int count)
@@ -194,8 +206,6 @@ public class SlenderManAI : MonoBehaviour
 
         transform.position = randomPosition;
 
-        // Play the teleport sound
-        audioSource.Play();
     }
 
     private void TeleportToBaseSpot()
